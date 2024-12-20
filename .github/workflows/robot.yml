@@ -4,31 +4,23 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出代码
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 设置 Docker 环境
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v2
-
-      # 运行 Robot Framework 测试
       - name: Run Robot Framework tests
         run: |
           docker run --rm -v $GITHUB_WORKSPACE:/github/workspace ppandiyan/robotframework robot --outputdir /github/workspace/testOutput /github/workspace/test.robot
 
-      # 上传测试输出作为工件
-      - name: Upload test results
-        uses: actions/upload-artifact@v3
+      # 部署测试报告到 GitHub Pages 分支
+      - name: Deploy report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: testOutput
-          path: testOutput
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./testOutput
+          publish_branch: gh-pages
