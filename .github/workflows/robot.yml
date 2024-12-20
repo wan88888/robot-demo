@@ -17,10 +17,10 @@ jobs:
         run: |
           docker run --rm -v $GITHUB_WORKSPACE:/github/workspace ppandiyan/robotframework robot --outputdir /github/workspace/testOutput /github/workspace/test.robot
 
-      # 部署测试报告到 GitHub Pages 分支
+      # Deploy test report to GitHub Pages using a Personal Access Token (PAT)
       - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           publish_dir: ./testOutput
           publish_branch: gh-pages
