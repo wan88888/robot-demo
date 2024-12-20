@@ -1,0 +1,12 @@
+stages:
+  - test
+
+test:
+  image: ppandiyan/robotframework
+  stage: test
+  script:
+    - robot  --outputdir testOutput test.robot
+  artifacts:
+    when: always
+    paths:
+      - testOutput
