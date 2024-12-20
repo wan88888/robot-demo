@@ -23,9 +23,8 @@ jobs:
 
       # 运行 Robot Framework 测试
       - name: Run Robot Framework tests
-        uses: docker://ppandiyan/robotframework
-        with:
-          args: --outputdir testOutput test.robot
+        run: |
+          docker run --rm -v $GITHUB_WORKSPACE:/github/workspace ppandiyan/robotframework robot --outputdir /github/workspace/testOutput /github/workspace/test.robot
 
       # 上传测试输出作为工件
       - name: Upload test results
