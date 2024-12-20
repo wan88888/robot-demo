@@ -3,10 +3,10 @@ name: Robot Framework Test
 on:
   push:
     branches:
-      - main  # 或者其他你希望触发工作流的分支
+      - main
   pull_request:
     branches:
-      - main  # 或者其他你希望触发工作流的分支
+      - main
 
 jobs:
   test:
